@@ -23,8 +23,9 @@ get account_abc123hdf
 
 ## ip tables config example
 
-Allow redit access on localhost only
+Allow redit access on localhost & docker only
 ```
--A INPUT -s 127.0.0.1/32 -p tcp -m tcp --dport 6379 -j ACCEPT
--A INPUT -p tcp -m tcp --dport 6379 -j REJECT --reject-with icmp-port-unreachable
+iptables -A INPUT -s 127.0.0.1/32 -p tcp -m tcp --dport 6379 -j ACCEPT
+iptables -A INPUT -s 172.17.0.0/16 -p tcp -m tcp --dport 6379 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 6379 -j REJECT --reject-with icmp-port-unreachable
 ```
