@@ -48,4 +48,4 @@ jobs:
         run: |
           eval `ssh-agent -s`
           ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
-          ssh dokku@${{ secrets.DOKKU_HOST }} -C 'dokku enter testing-subscribie-redis web echo "CONFIG SET requirepass ${{ secrets.REDIS_PASSWORD }}" | nc -w 1 127.0.0.1 6379'
+          ssh dokku@${{ secrets.DOKKU_HOST }} -C 'dokku enter testing-subscribie-redis web /usr/local/etc/redis/setpass.sh ${{ secrets.REDIS_PASSWORD }}'
