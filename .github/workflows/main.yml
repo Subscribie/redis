@@ -25,14 +25,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - id: deploy
-        name: Deploy to dokku
-        uses: idoberko2/dokku-deploy-github-action@v1
-        with:
-            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-            dokku-host: ${{ secrets.DOKKU_HOST }}
-            app-name: 'testing-subscribie-redis'
-
       - name: Prepare runner with ssh keys
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -48,4 +40,4 @@ jobs:
         run: |
           eval `ssh-agent -s`
           ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
-          ssh dokku@${{ secrets.DOKKU_HOST }} -C 'dokku enter testing-subscribie-redis web /usr/local/etc/redis/setpass.sh ${{ secrets.REDIS_PASSWORD }}'
+          ssh dokku@${{ secrets.DOKKU_HOST }} -C 'echo CONFIG SET requirepass ${{ secrets.REDIS_PASSWORD }} | nc -w 1 127.0.0.1 6379'

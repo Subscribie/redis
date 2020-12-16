@@ -8,4 +8,4 @@ then
   exit 1
 fi
 
-echo "CONFIG SET requirepass $1" | nc -w 1 127.0.0.1 6379
+echo CONFIG SET requirepass $1 | nc -w 1 127.0.0.1 6379
