@@ -29,3 +29,5 @@ iptables -A INPUT -s 127.0.0.1/32 -p tcp -m tcp --dport 6379 -j ACCEPT
 iptables -A INPUT -s 172.17.0.0/16 -p tcp -m tcp --dport 6379 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 6379 -j REJECT --reject-with icmp-port-unreachable
 ```
+
+To persist these on ubuntu 20.04, use `apt install iptables-persistent`
