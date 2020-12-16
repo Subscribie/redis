@@ -20,3 +20,11 @@ e.g:
 get account_abc123hdf
 ```
 (And then sends the webhook payload to the correct shop)
+
+## ip tables config example
+
+Allow redit access on localhost only
+```
+-A INPUT -s 127.0.0.1/32 -p tcp -m tcp --dport 6379 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 6379 -j REJECT --reject-with icmp-port-unreachable
+```
