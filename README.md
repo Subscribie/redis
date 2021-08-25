@@ -3,7 +3,7 @@ Shops (sites) announce their Stripe connect account id to a redis server.
 The key is their stripe connect account id
 The value is their web address
 
-e.g The shop's (via a cron) report their account id by sending:
+e.g The shop's (via a cron, performs a HTTP post request) to report their account id by sending:
 
 ```
 set account_abc123hdf https://example.com
